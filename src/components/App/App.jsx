@@ -1,57 +1,29 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import {
-  addContact,
-  deleteContact,
-  fetchContacts,
-  setFilter,
-} from '../../redux/contacts/contactsSlice';
-import ContactForm from '../ContactForm/ContactForm';
-import ContactList from '../ContactList/ContactList';
-import Filter from '../Filter/Filter';
-import styles from './App.module.css';
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
+
+import Navigation from '../Navigation/Navigation';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import Contacts from '../Contact/Contacts';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.contacts.filter);
-  const status = useSelector(state => state.contacts.status);
-  const error = useSelector(state => state.contacts.error);
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchContacts());
-    }
-  }, [status, dispatch]);
-
-  const handleAddContact = newContact => {
-    dispatch(addContact(newContact));
-  };
-
-  const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
-  };
-
-  const handleFilterChange = event => {
-    dispatch(setFilter(event.target.value));
-  };
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
-    <div className={styles.phonebook}>
-      <h1>Phonebook</h1>
-      {/* {status === 'loading' && <p>Loading...</p>} */}
-      {status === 'failed' && <p>{error}</p>}
-      <ContactForm addContact={handleAddContact} />
-      <h2>Contacts</h2>
-      <Filter filterValue={filter} setFilterValue={handleFilterChange} />
-      <ContactList
-        contacts={filteredContacts}
-        onDeleteContact={handleDeleteContact}
-      />
-    </div>
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={<PrivateRoute />}>
+          <Route index element={<Contacts />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/contacts" />} />
+      </Routes>
+    </Router>
   );
 };
