@@ -7,7 +7,6 @@ import {
 } from '../../redux/contacts/operations';
 import ContactList from '../ContactList/ContactList';
 import ContactForm from '../ContactForm/ContactForm';
-import { logOut } from '../../redux/auth/operations';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -23,10 +22,6 @@ const Contacts = () => {
     dispatch(addContact(contact));
   };
 
-  const handleLogout = () => {
-    dispatch(logOut());
-  }; // Dodaj obsługę wylogowania
-
   if (status === 'loading') {
     return <p>Loading...</p>;
   }
@@ -38,7 +33,6 @@ const Contacts = () => {
   return (
     <div>
       <h1>Your Contacts</h1>
-      <button onClick={handleLogout}>Log Out</button> {/* Dodaj przycisk */}
       <ContactForm addContact={handleAddContact} />
       <ContactList
         contacts={contacts}
