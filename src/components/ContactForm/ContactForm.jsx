@@ -3,48 +3,35 @@ import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
 
 const ContactForm = ({ addContact }) => {
-  const [nameValue, setNameValue] = useState('');
-  const [numberValue, setNumberValue] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!nameValue.trim() || !numberValue.trim()) return;
-
-    const newContact = { name: nameValue, phone: numberValue };
-    addContact(newContact);
-
-    setNameValue('');
-    setNumberValue('');
+    addContact({ name, phone });
+    setName('');
+    setPhone('');
   };
 
   return (
     <form className={styles.contactForm} onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={nameValue}
-          onChange={e => setNameValue(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="phone">Number</label>
-        <input
-          type="tel"
-          name="phone"
-          id="phone"
-          value={numberValue}
-          onChange={e => setNumberValue(e.target.value)}
-          required
-        />
-      </div>
-      <button className={styles.addBtn} type="submit">
-        Add contact
-      </button>
+      <label htmlFor="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+        required
+      />
+      <label htmlFor="phone">Phone</label>
+      <input
+        type="tel"
+        id="phone"
+        value={phone}
+        onChange={e => setPhone(e.target.value)}
+        required
+      />
+      <button type="submit">Add Contact</button>
     </form>
   );
 };

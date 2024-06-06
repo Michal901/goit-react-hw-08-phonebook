@@ -1,7 +1,12 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from '../../redux/contacts/operations';
+import {
+  fetchContacts,
+  deleteContact,
+  addContact,
+} from '../../redux/contacts/operations';
 import ContactList from '../ContactList/ContactList';
+import ContactForm from '../ContactForm/ContactForm';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -12,6 +17,10 @@ const Contacts = () => {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
+  const handleAddContact = contact => {
+    dispatch(addContact(contact));
+  };
 
   if (status === 'loading') {
     return <p>Loading...</p>;
@@ -24,6 +33,7 @@ const Contacts = () => {
   return (
     <div>
       <h1>Your Contacts</h1>
+      <ContactForm addContact={handleAddContact} />
       <ContactList
         contacts={contacts}
         onDeleteContact={id => dispatch(deleteContact(id))}

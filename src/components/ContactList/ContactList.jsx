@@ -2,10 +2,6 @@ import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
-  if (!contacts) {
-    return <p>Loading...</p>; // lub inny komunikat ładowania
-  }
-
   return (
     <ul className={styles.contactList}>
       {contacts.map(contact => (
@@ -27,7 +23,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.array,
+  contacts: PropTypes.array.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 
