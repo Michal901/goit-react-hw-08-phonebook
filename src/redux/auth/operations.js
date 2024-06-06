@@ -20,7 +20,7 @@ export const register = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response && error.response.data) {
-        return thunkAPI.rejectWithValue(error.response.data.message); // improved error message handling
+        return thunkAPI.rejectWithValue(error.response.data.message);
       } else {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -37,7 +37,7 @@ export const logIn = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response && error.response.data) {
-        return thunkAPI.rejectWithValue(error.response.data.message); // improved error message handling
+        return thunkAPI.rejectWithValue(error.response.data.message);
       } else {
         return thunkAPI.rejectWithValue(error.message);
       }

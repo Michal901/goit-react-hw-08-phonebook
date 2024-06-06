@@ -2,13 +2,15 @@ import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
+  console.log('Rendering contacts:', contacts);
+
   return (
     <ul className={styles.contactList}>
       {contacts.map(contact => (
         <li key={contact.id}>
           <p>
             <strong>{contact.name}: </strong>
-            {contact.phone}
+            {contact.number}
           </p>
           <button
             className={styles.customBtn}
