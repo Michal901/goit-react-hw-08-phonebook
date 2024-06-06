@@ -11,7 +11,7 @@ const ContactForm = () => {
     event.preventDefault();
 
     const newContact = { name, number };
-    console.log('Submitting contact:', newContact); // Logowanie danych
+    console.log('Submitting contact:', newContact);
 
     if (!name || !number) {
       console.error('Missing required fields');
@@ -21,10 +21,10 @@ const ContactForm = () => {
     dispatch(addContact(newContact))
       .unwrap()
       .then(response => {
-        console.log('Contact added:', response); // Logowanie odpowiedzi z backendu
+        console.log('Contact added:', response);
       })
       .catch(error => {
-        console.error('Error adding contact:', error); // Logowanie błędów
+        console.error('Error adding contact:', error);
       });
 
     setName('');
