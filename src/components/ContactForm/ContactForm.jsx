@@ -42,7 +42,7 @@ const ContactForm = () => {
         />
       </label>
       <label>
-        Phone:
+        Phone number:
         <input
           type="text"
           value={number}
